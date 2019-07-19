@@ -3,6 +3,7 @@ module.exports = {
     host: "localhost",
     port: 8080,
     https: true,
+    disableHostCheck: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
