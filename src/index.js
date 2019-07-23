@@ -1,7 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component, Suspense} from 'react'
 import ReactDOM from 'react-dom';
 import { api31Call } from './helpers';
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
+const Home = React.lazy(() => import('./components/pages/home.js'))
+const Admin = React.lazy(() => import('./components/pages/admin.js'))
 
 class App extends Component {
   constructor(props) {
@@ -20,15 +23,19 @@ class App extends Component {
   
   render() {
     return (
-      <>
-        <p>Application!</p>
-        <p>User API!</p>
-        <p>{this.state.user}</p>
-      </>
+      <div>
+        <h1>My Application</h1>
+        <div>{this.state.user}</div>
+        <BrowserRouter>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route exact path="/applications/geppettodev" component={Home} />
+            <Route path="/applications/geppettodev/admin" component={Admin} />
+          </Suspense>
+        </BrowserRouter>
+      </div>
       )
     }
   }
-  
   window.addEventListener('load', () => {
     ReactDOM.render( <App />, document.getElementById('app-container'));
   }, false); 
