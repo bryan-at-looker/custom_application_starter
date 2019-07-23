@@ -11,9 +11,12 @@ module.exports = {
     }
   },
   entry: ['babel-polyfill', './src/index.js'],
-
   output: {
-    filename: 'main.js'       
+    filename: 'main.js',
+    // `chunkFilename` provides a template for naming code-split bundles (optional)
+    chunkFilename: '[name].main.js',
+    // `publicPath` is where Webpack will load your bundles from (optional)
+    publicPath: 'https://localhost:8080/'
   },
   module: {
     rules: [
