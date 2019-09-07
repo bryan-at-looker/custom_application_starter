@@ -1,7 +1,7 @@
 import React, {Component, Suspense} from 'react'
 import ReactDOM from 'react-dom';
 import { api31Call } from './helpers';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 const Home = React.lazy(() => import('./components/pages/home.js'))
 const Admin = React.lazy(() => import('./components/pages/admin.js'))
@@ -26,10 +26,10 @@ class App extends Component {
       <div>
         <h1>My Application</h1>
         <div>{this.state.user}</div>
-        <BrowserRouter>
+        <BrowserRouter basename={'/applications/'+window.lookerMetadata.app.id}>
           <Suspense fallback={<div>Loading...</div>}>
-            <Route exact path="/applications/geppettodev" component={Home} />
-            <Route path="/applications/geppettodev/admin" component={Admin} />
+            <Route exact path="/" component={Home} />
+            <Route path="/admin" component={Admin} />
           </Suspense>
         </BrowserRouter>
       </div>
